@@ -11,17 +11,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.kenkoro.stopwatch.model.Stopwatch
 import com.kenkoro.stopwatch.view.heights.Heights
 import com.kenkoro.stopwatch.view.heights.LocalHeights
 
@@ -64,7 +64,14 @@ fun StopwatchScreen(
                 PathBuilderBox(
                     label = "BL'D'RU'D2L2D2R'DFB2UD'F2R2UD2R2U'", height = heights.medium
                 )
-                StopwatchBox(height = heights.large)
+                val stopwatch = remember { Stopwatch() }
+                StopwatchBox(
+                    formattedTime = stopwatch.formattedTime,
+                    stopwatch = stopwatch,
+                    onStartClick = stopwatch::start,
+                    onResetClick = stopwatch::reset,
+                    onPauseClick = stopwatch::pause
+                )
                 StatsBox(height = heights.medium)
             }
         }
