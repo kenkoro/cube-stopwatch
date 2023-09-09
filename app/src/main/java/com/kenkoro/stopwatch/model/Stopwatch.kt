@@ -3,6 +3,7 @@ package com.kenkoro.stopwatch.model
 import android.os.Build
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,26 @@ class Stopwatch {
 
     private var timeMillis = 0L
     private var lastTimestamp = 0L
+
+    companion object {
+        val stopwatchSaver = listSaver<Stopwatch, Any>(
+            save = {
+                listOf(
+                    it.formattedTime,
+                    it.timeMillis,
+                    it.lastTimestamp
+                )
+            },
+            restore = {
+                Stopwatch().apply {
+                    formattedTime = it[0] as String
+                    isRunning = false
+                    timeMillis = it[1] as Long
+                    lastTimestamp = it[2] as Long
+                }
+            }
+        )
+    }
 
     fun start() {
         if (isRunning) return
