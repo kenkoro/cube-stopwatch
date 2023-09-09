@@ -42,6 +42,7 @@ jobs:
       - name: 'Run tests (Java version: ${{ env.JAVA }})'
         run: |
           ./gradlew test --no-daemon
+          ./gradlew koverXmlReport --no-daemon
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
