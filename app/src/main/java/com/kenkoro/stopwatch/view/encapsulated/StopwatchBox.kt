@@ -8,6 +8,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import com.kenkoro.stopwatch.model.ScramblerBuilder
 import com.kenkoro.stopwatch.model.Stopwatch
 import com.kenkoro.stopwatch.model.StopwatchSaver
 import com.kenkoro.stopwatch.view.StopwatchUi
@@ -17,6 +18,7 @@ import com.kenkoro.stopwatch.view.locals.Paddings
 @Composable
 fun StopwatchBox(
     modifier: Modifier = Modifier,
+    onLableChange: (newLabel: String) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
     val paddings = Paddings()
@@ -38,7 +40,10 @@ fun StopwatchBox(
                 } else {
                     when (stopwatch.formattedTime) {
                         "00:00" -> stopwatch.start()
-                        else -> stopwatch.reset()
+                        else -> {
+                            stopwatch.reset()
+                            onLableChange(ScramblerBuilder.generate())
+                        }
                     }
                 }
             }

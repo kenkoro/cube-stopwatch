@@ -10,9 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.kenkoro.stopwatch.view.bars.BottomBar
-import com.kenkoro.stopwatch.view.encapsulated.PathBuilderBox
+import com.kenkoro.stopwatch.view.encapsulated.ScramblerAndStopwatch
 import com.kenkoro.stopwatch.view.encapsulated.StatsBox
-import com.kenkoro.stopwatch.view.encapsulated.StopwatchBox
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -30,8 +29,7 @@ fun StopwatchScreen(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            PathBuilderBox()
-            StopwatchBox()
+            ScramblerAndStopwatch()
             StatsBox()
         }
     }

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PathBuilder(
+fun Scrambler(
     modifier: Modifier = Modifier,
     padding: Dp,
     height: Dp,
@@ -36,7 +36,7 @@ fun PathBuilder(
         Text(
             text = label,
             color = MaterialTheme.colorScheme.onPrimaryContainer,
-            letterSpacing = 5.sp,
+            letterSpacing = 2.sp,
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier
