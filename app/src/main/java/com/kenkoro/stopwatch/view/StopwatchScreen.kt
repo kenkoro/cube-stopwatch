@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.kenkoro.stopwatch.view
 
 import android.annotation.SuppressLint
@@ -10,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.kenkoro.stopwatch.model.Stopwatch
+import com.kenkoro.stopwatch.model.StopwatchSaver
 import com.kenkoro.stopwatch.view.heights.Heights
 import com.kenkoro.stopwatch.view.heights.LocalHeights
 
@@ -50,7 +48,9 @@ fun StopwatchScreen(
                 ) {
                     Button(
                         modifier = Modifier.width(150.dp),
-                        onClick = { navController.navigate(Screen.RecordsScreen.route) }
+                        onClick = {
+                            navController.navigate(Screen.RecordsScreen.route)
+                        }
                     ) {
                         Text(text = "Records")
                     }
@@ -67,7 +67,7 @@ fun StopwatchScreen(
                     label = "BL'D'RU'D2L2D2R'DFB2UD'F2R2UD2R2U'", height = heights.medium
                 )
 
-                val stopwatch by rememberSaveable(stateSaver = Stopwatch.stopwatchSaver) {
+                val stopwatch by rememberSaveable(stateSaver = StopwatchSaver.saver) {
                     mutableStateOf(Stopwatch())
                 }
                 StopwatchBox(

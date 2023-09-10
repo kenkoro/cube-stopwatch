@@ -17,33 +17,12 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class Stopwatch {
-    var formattedTime by mutableStateOf("00:00")
-
     private var coroutineScope = CoroutineScope(Dispatchers.Main)
+
+    var timeMillis = 0L
+    var lastTimestamp = 0L
+    var formattedTime by mutableStateOf("00:00")
     var isRunning = false
-
-    private var timeMillis = 0L
-    private var lastTimestamp = 0L
-
-    companion object {
-        val stopwatchSaver = listSaver<Stopwatch, Any>(
-            save = {
-                listOf(
-                    it.formattedTime,
-                    it.timeMillis,
-                    it.lastTimestamp
-                )
-            },
-            restore = {
-                Stopwatch().apply {
-                    formattedTime = it[0] as String
-                    isRunning = false
-                    timeMillis = it[1] as Long
-                    lastTimestamp = it[2] as Long
-                }
-            }
-        )
-    }
 
     fun start() {
         if (isRunning) return
