@@ -1,4 +1,4 @@
-package com.kenkoro.stopwatch.view.heights
+package com.kenkoro.stopwatch.view.locals
 
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
