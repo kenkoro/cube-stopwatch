@@ -5,16 +5,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import com.kenkoro.stopwatch.model.ScramblerBuilder
 
 @Composable
-fun ScramblerAndStopwatch() {
+fun ScramblerAndStopwatch(
+    modifier: Modifier = Modifier,
+) {
     var label by remember {
         mutableStateOf(
             ScramblerBuilder.generate()
         )
     }
 
-    ScramblerBox(label = label)
-    StopwatchBox(onLableChange = { label = it })
+    ScramblerBox(modifier = modifier, label = label)
+    StopwatchBox(
+        modifier = modifier,
+        onLabelChange = { label = it }
+    )
 }

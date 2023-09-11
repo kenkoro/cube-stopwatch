@@ -17,6 +17,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -29,6 +31,7 @@ fun BottomBarWithContent(
     var selectedTabIndex by remember {
         mutableIntStateOf(0)
     }
+    val haptic = LocalHapticFeedback.current
 
     LaunchedEffect(selectedTabIndex) {
         pagerState.animateScrollToPage(selectedTabIndex)
@@ -61,6 +64,7 @@ fun BottomBarWithContent(
                     selected = index == selectedTabIndex,
                     onClick = {
                         selectedTabIndex = index
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     },
                     text = {
                         Text(text = tabItem.title)
