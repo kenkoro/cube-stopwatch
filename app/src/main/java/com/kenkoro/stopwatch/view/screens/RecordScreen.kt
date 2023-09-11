@@ -8,13 +8,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.kenkoro.stopwatch.view.encapsulated.ScramblerAndStopwatch
-import com.kenkoro.stopwatch.view.encapsulated.StatsBox
 
 @Composable
-fun StopwatchScreen(
+fun RecordScreen(
     modifier: Modifier = Modifier
 ) {
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -22,7 +21,5 @@ fun StopwatchScreen(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ScramblerAndStopwatch()
-        StatsBox()
     }
 }
