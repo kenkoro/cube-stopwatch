@@ -9,34 +9,41 @@ import java.util.Locale
 
 object InternalRepository {
     private lateinit var directory: File
-    private lateinit var todayFile: File
+    private lateinit var currentFile: File
+    private lateinit var fileHistory: MutableList<File>
 
     fun configDirectory(directory: File) {
         InternalRepository.directory = directory
+        fileHistory = mutableListOf()
         createTodayFile()
     }
 
     private fun createTodayFile() {
         val date = getCurrentDate()
-        todayFile = File(directory, "$date.txt")
+        currentFile = File(directory, "$date.txt")
+        fileHistory.add(currentFile)
     }
 
     private fun save(record: String) {
-        FileOutputStream(todayFile, true).use { stream ->
+        FileOutputStream(currentFile, true).use { stream ->
             stream.write(("$record\n").toByteArray())
         }
     }
 
-    fun todayRecords(): String {
+    fun todayRecords(): MutableList<String> {
         if (!isTodayFilePresent()) {
             createTodayFile()
         }
 
-        var records = ""
-        if (todayFile.exists()) {
-            records = FileInputStream(todayFile).bufferedReader().use { it.readText() }
+        val listOfRecords = mutableListOf<String>()
+        fileHistory.forEach { file ->
+            var records = ""
+            if (file.exists()) {
+                records = FileInputStream(file).bufferedReader().use { it.readText() }
+            }
+            listOfRecords.add(records)
         }
-        return records
+        return listOfRecords
     }
 
     private fun getCurrentDate(): String {
@@ -46,7 +53,7 @@ object InternalRepository {
     }
 
     private fun isTodayFilePresent(): Boolean {
-        return todayFile.name.equals("${getCurrentDate()}.txt")
+        return currentFile.name.equals("${getCurrentDate()}.txt")
     }
 
     fun saveRecord(record: String) {
