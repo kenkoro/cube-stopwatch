@@ -45,7 +45,7 @@ fun RecordScreen(
             }
 
             items(recordHistory.size) {
-                LazyColumn(
+                Column(
                     modifier = Modifier
                         .clip(RoundedCornerShape(15.dp))
                         .fillMaxWidth()
@@ -54,9 +54,9 @@ fun RecordScreen(
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
                     val recordsOfConcreteDay = recordHistory[it].split("\n")
-                    items(recordsOfConcreteDay.size) {
+                    recordsOfConcreteDay.forEach {record ->
                         Text(
-                            text = recordsOfConcreteDay[it],
+                            text = record,
                             color = MaterialTheme.colorScheme.onPrimary
                         )
                     }

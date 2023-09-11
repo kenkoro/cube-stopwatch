@@ -39,7 +39,7 @@ class Stopwatch {
     }
 
     fun pause() {
-        isRunning = false
+        isRunning = !isRunning
     }
 
     fun reset() {
