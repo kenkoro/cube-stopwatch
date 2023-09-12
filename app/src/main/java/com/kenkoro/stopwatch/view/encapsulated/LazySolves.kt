@@ -1,5 +1,6 @@
 package com.kenkoro.stopwatch.view.encapsulated
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -30,6 +32,7 @@ fun LazySolves(
     date: String,
     paddings: Paddings
 ) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -73,7 +76,11 @@ fun LazySolves(
                             RoundedCornerShape(15.dp)
                         )
                         .size(100.dp, 40.dp),
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        Toast(context).apply {
+                            setText("Not implemented")
+                        }.show()
+                    }
                 ) {
                     Text(
                         text = "remove",
