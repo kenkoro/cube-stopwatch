@@ -28,11 +28,11 @@ fun EmptyRecordContent() {
                 .size(80.dp),
             imageVector = Icons.TwoTone.EventNote,
             contentDescription = "No records",
-            tint = MaterialTheme.colorScheme.onPrimary
+            tint = MaterialTheme.colorScheme.onPrimaryContainer
         )
         Text(
             text = "No records",
-            color = MaterialTheme.colorScheme.onPrimary,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.bodyLarge
         )

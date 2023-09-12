@@ -23,7 +23,7 @@ fun BottomBarHost(
             selectedIcon = Icons.Filled.WatchLater
         ),
         TabItem(
-            title = "Records",
+            title = "Solves",
             unselectedIcon = Icons.Outlined.KeyboardDoubleArrowRight,
             selectedIcon = Icons.Filled.KeyboardDoubleArrowRight
         )

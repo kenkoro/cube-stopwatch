@@ -10,18 +10,15 @@ import java.util.Locale
 object InternalRepository {
     private lateinit var directory: File
     private lateinit var currentFile: File
-    private lateinit var fileHistory: MutableList<File>
 
     fun configDirectory(directory: File) {
         InternalRepository.directory = directory
-        fileHistory = mutableListOf()
         createTodayFile()
     }
 
     private fun createTodayFile() {
         val date = getCurrentDate()
         currentFile = File(directory, "$date.txt")
-        fileHistory.add(currentFile)
     }
 
     private fun save(record: String) {
@@ -30,20 +27,38 @@ object InternalRepository {
         }
     }
 
-    fun todayRecords(): MutableList<String> {
+    fun allRecords(): List<String> {
         if (!isTodayFilePresent()) {
             createTodayFile()
         }
 
         val listOfRecords = mutableListOf<String>()
-        fileHistory.forEach { file ->
+        File(directory.path).walk().forEach { file ->
             var records = ""
-            if (file.exists()) {
+            if (file.exists() && file.isFile) {
                 records = FileInputStream(file).bufferedReader().use { it.readText() }
             }
             listOfRecords.add(records)
         }
-        return listOfRecords
+
+        return listOfRecords.filter { it.isNotEmpty() }
+    }
+
+    fun allDates(): List<String> {
+        if (!isTodayFilePresent()) {
+            createTodayFile()
+        }
+
+        val dates = mutableListOf<String>()
+        File(directory.path).walk().forEach {
+            dates.add(
+                it.path
+                    .replace("${directory.toString()}/", "")
+                    .replace(".txt", "")
+            )
+        }
+
+        return dates.filter { it.isNotEmpty() }.sortedDescending()
     }
 
     private fun getCurrentDate(): String {
